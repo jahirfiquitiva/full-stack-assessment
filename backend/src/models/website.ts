@@ -39,6 +39,10 @@ const WebsiteSchema = new Schema({
     },
   ],
   links: [LinkSchema],
+  linksCount: {
+    type: Number,
+    default: 0,
+  },
 });
 
 WebsiteSchema.methods.toJSON = function (): string {

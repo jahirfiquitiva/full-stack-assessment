@@ -17,7 +17,7 @@ const transformHtmlToDom = (html: string): Document => {
 
 export const scrapeWebsite = async (
   url: string,
-): Promise<Pick<Website, 'title' | 'links'> | undefined> => {
+): Promise<Pick<Website, 'title' | 'links' | 'linksCount'> | undefined> => {
   const websiteHtml = await fetchWebsiteHtml(url);
   if (!websiteHtml) return undefined;
 
@@ -38,5 +38,5 @@ export const scrapeWebsite = async (
     }
   });
 
-  return { title, links };
+  return { title, links, linksCount: links.length };
 };

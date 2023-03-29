@@ -10,6 +10,7 @@ export interface Website {
   title: string;
   url: string;
   links: Array<Link>;
+  linksCount: number;
   users: Array<string>;
 }
 

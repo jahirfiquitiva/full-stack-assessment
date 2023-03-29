@@ -9,11 +9,15 @@ interface ErrorResponse extends DefaultResponse {
   errors: string | Array<string> | Record<string, ValidationError>;
 }
 
-interface SuccessResponse<T> extends DefaultResponse {
-  ok: true;
-  data: T;
+interface PaginatedData {
   page?: number;
   limit?: number;
+  count?: number;
+}
+
+interface SuccessResponse<T> extends DefaultResponse, PaginatedData {
+  ok: true;
+  data: T;
 }
 
 export type ApiResponse<T> = SuccessResponse<T> | ErrorResponse;

@@ -1,14 +1,12 @@
-import type { SuccessResponse, ErrorResponse } from 'types';
+import type { SuccessResponse, ErrorResponse, PaginatedData } from 'types';
 
 export const createSuccessResponse = <T>(
   data: T,
-  page?: number,
-  limit?: number,
+  paginatedData?: PaginatedData,
 ): SuccessResponse<T> => ({
   ok: true,
   data,
-  page,
-  limit,
+  ...paginatedData,
 });
 
 export const createErrorResponse = (

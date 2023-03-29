@@ -79,15 +79,19 @@ export const findWebsitesForUserRequestHandler: RequestHandler<
     const websites = await findWebsitesForUser(user.id)
       .skip(pageNumber * itemsLimit)
       .limit(itemsLimit);
-    return res
-      .status(200)
-      .json(createSuccessResponse(websites, pageNumber + 1, itemsLimit));
+    return res.status(200).json(
+      createSuccessResponse(websites, {
+        page: pageNumber + 1,
+        limit: itemsLimit,
+        count: websites.length,
+      }),
+    );
   } catch (e: unknown) {
     return res.status(500).json(createErrorResponse((e as Error).message));
   }
 };
 
-export const findLinksForWebsite: RequestHandler<Array<Website>> = async (
+export const findLinksForWebsite: RequestHandler<Website> = async (
   req,
   res,
 ) => {
@@ -100,13 +104,23 @@ export const findLinksForWebsite: RequestHandler<Array<Website>> = async (
     // limit to 5 items by default
     const itemsLimit = parseInt(limit as string, 10) || 5;
 
-    const websites = await WebsiteModel.find(
+    const website = await WebsiteModel.findOne(
       { _id: websiteId },
       { _id: 0, links: { $slice: [pageNumber * itemsLimit, itemsLimit] } },
     );
-    return res
-      .status(200)
-      .json(createSuccessResponse(websites, pageNumber + 1, itemsLimit));
+    if (!website) {
+      return res
+        .status(401)
+        .json(createErrorResponse(`Website "${websiteId}" was not found`));
+    }
+
+    return res.status(200).json(
+      createSuccessResponse(website, {
+        page: pageNumber + 1,
+        limit: itemsLimit,
+        count: website.linksCount,
+      }),
+    );
   } catch (e: unknown) {
     return res.status(500).json(createErrorResponse((e as Error).message));
   }

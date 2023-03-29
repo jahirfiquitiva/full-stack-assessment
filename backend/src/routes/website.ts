@@ -35,8 +35,8 @@ const router: Router = Router();
  * /api/website:
  *   post:
  *     tags: [Website]
- *     summary: Login website
- *     description: Returns the website data (id and websitename). If it doesn't exist, it's created
+ *     summary: Creates a new website record in the database
+ *     description: Returns the website data (id, title, url and links). If it doesn't exist, it's created
  *     requestBody:
  *       required: true
  *       content:
