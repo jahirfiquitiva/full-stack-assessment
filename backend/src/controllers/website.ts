@@ -79,7 +79,34 @@ export const findWebsitesForUserRequestHandler: RequestHandler<
     const websites = await findWebsitesForUser(user.id)
       .skip(pageNumber * itemsLimit)
       .limit(itemsLimit);
-    return res.status(200).json(createSuccessResponse(websites));
+    return res
+      .status(200)
+      .json(createSuccessResponse(websites, pageNumber + 1, itemsLimit));
+  } catch (e: unknown) {
+    return res.status(500).json(createErrorResponse((e as Error).message));
+  }
+};
+
+export const findLinksForWebsite: RequestHandler<Array<Website>> = async (
+  req,
+  res,
+) => {
+  try {
+    const { websiteId } = req.params;
+    const { page, limit } = req.query;
+
+    // allow pages numbers from 1 instead of 0
+    const pageNumber = (parseInt(page as string, 10) || 1) - 1;
+    // limit to 5 items by default
+    const itemsLimit = parseInt(limit as string, 10) || 5;
+
+    const websites = await WebsiteModel.find(
+      { _id: websiteId },
+      { _id: 0, links: { $slice: [pageNumber * itemsLimit, itemsLimit] } },
+    );
+    return res
+      .status(200)
+      .json(createSuccessResponse(websites, pageNumber + 1, itemsLimit));
   } catch (e: unknown) {
     return res.status(500).json(createErrorResponse((e as Error).message));
   }

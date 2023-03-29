@@ -1,7 +1,11 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
 
-import { saveWebsite, findWebsitesForUserRequestHandler } from './../controllers/website';
+import {
+  saveWebsite,
+  findWebsitesForUserRequestHandler,
+  findLinksForWebsite,
+} from './../controllers/website';
 import { validator } from './../middlewares/validator';
 
 const router: Router = Router();
@@ -58,7 +62,6 @@ router.post(
   saveWebsite,
 );
 
-
 /**
  * @swagger
  * /api/website:
@@ -71,6 +74,16 @@ router.post(
  *         schema:
  *           type: string
  *         description: The username of the user to search websites for
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *         description: The page number to start showing items from
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *         description: The limit of items to get for the given page
  *     responses:
  *       "200":
  *         description:
@@ -83,6 +96,42 @@ router.get(
   '/',
   [check('user', 'Username is required').notEmpty(), validator],
   findWebsitesForUserRequestHandler,
+);
+
+/**
+ * @swagger
+ * /api/website/{websiteId}:
+ *   get:
+ *     tags: [Website]
+ *     summary: Get the scrapped links for a website if it exists
+ *     parameters:
+ *       - in: path
+ *         name: websiteId
+ *         schema:
+ *           type: string
+ *         description: The id of the website
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *         description: The page number to start showing items from
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *         description: The limit of items to get for the given page
+ *     responses:
+ *       "200":
+ *         description:
+ *           Process completed successfully. A list of links is returned (can be empty).
+ *       "500":
+ *         description: Couldn't connect to database or an unexpected error occurred.
+ */
+
+router.get(
+  '/:websiteId',
+  [check('websiteId', 'websiteId is required').notEmpty(), validator],
+  findLinksForWebsite,
 );
 
 export default router;

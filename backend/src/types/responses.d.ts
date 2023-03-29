@@ -12,6 +12,8 @@ interface ErrorResponse extends DefaultResponse {
 interface SuccessResponse<T> extends DefaultResponse {
   ok: true;
   data: T;
+  page?: number;
+  limit?: number;
 }
 
 export type ApiResponse<T> = SuccessResponse<T> | ErrorResponse;
