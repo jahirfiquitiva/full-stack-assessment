@@ -1,6 +1,9 @@
-import { UserModel } from 'models/user';
+import { UserModel } from './../models/user';
 import type { MongoQuery, RequestHandler, User, UserDocument } from 'types';
-import { createSuccessResponse, createErrorResponse } from 'utils/responses';
+import {
+  createSuccessResponse,
+  createErrorResponse,
+} from './../utils/responses';
 
 export const findUserWithUsername = (
   username: User['username'],
@@ -12,6 +15,11 @@ export const loginUser: RequestHandler<{ username: string }, User> = async (
 ) => {
   try {
     const { username } = req.body;
+    if (!username)
+      return res
+        .status(400)
+        .json(createErrorResponse('Missing username in request'));
+
     let user = await findUserWithUsername(username);
     if (!user) {
       user = new UserModel({ username });
