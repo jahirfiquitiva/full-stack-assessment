@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
 
-import { loginUser } from './../controllers/user';
+import { findOrCreateUserRequestHandler } from './../controllers/user';
 import { validator } from './../middlewares/validator';
 
 const router: Router = Router();
@@ -26,7 +26,7 @@ const router: Router = Router();
 
 /**
  * @swagger
- * /api/user/login:
+ * /api/user:
  *   post:
  *     tags: [User]
  *     summary: Login user
@@ -46,7 +46,7 @@ const router: Router = Router();
  */
 
 router.post(
-  '/login',
+  '/',
   [
     check('username', 'Username is required').notEmpty(),
     check('username', 'Username must be lowercase').isLowercase(),
@@ -68,7 +68,7 @@ router.post(
     ),
     validator,
   ],
-  loginUser,
+  findOrCreateUserRequestHandler,
 );
 
 export default router;

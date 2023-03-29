@@ -19,7 +19,7 @@ const findOrCreateUser = async (
   return user;
 };
 
-export const loginUser: RequestHandler<{ username: string }, User> = async (
+export const findOrCreateUserRequestHandler: RequestHandler<{ username: string }, User> = async (
   req,
   res,
 ) => {
