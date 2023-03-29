@@ -76,6 +76,7 @@ export const findWebsitesForUserRequestHandler: RequestHandler<
     // limit to 5 items by default
     const itemsLimit = parseInt(limit as string, 10) || 5;
 
+    const websitesCount = await WebsiteModel.countDocuments({ users: user.id });
     const websites = await findWebsitesForUser(user.id)
       .skip(pageNumber * itemsLimit)
       .limit(itemsLimit);
@@ -83,7 +84,7 @@ export const findWebsitesForUserRequestHandler: RequestHandler<
       createSuccessResponse(websites, {
         page: pageNumber + 1,
         limit: itemsLimit,
-        count: websites.length,
+        count: websitesCount,
       }),
     );
   } catch (e: unknown) {
