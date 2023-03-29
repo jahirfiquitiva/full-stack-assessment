@@ -1,4 +1,3 @@
-export * from './link';
 export * from './mongo-query';
 export * from './request';
 export * from './responses';

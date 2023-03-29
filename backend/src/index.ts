@@ -5,6 +5,7 @@ import * as dotenv from 'dotenv';
 import dbConnection from './database/config';
 import docsRoutes from './routes/swagger';
 import userRoutes from './routes/user';
+import websiteRoutes from './routes/website';
 
 dotenv.config();
 const app = express();
@@ -20,6 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(`${baseApiUrl}/docs`, docsRoutes);
 app.use(`${baseApiUrl}/user`, userRoutes);
+app.use(`${baseApiUrl}/website`, websiteRoutes);
 
 app.listen(port, () => {
   console.info(`API running in port ${port}`);
