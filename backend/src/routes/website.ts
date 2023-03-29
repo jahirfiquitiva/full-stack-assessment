@@ -67,7 +67,7 @@ router.post(
  * /api/website:
  *   get:
  *     tags: [Website]
- *     summary: Get the scrapped websites for the given user
+ *     summary: Get the scraped websites for the given user
  *     parameters:
  *       - in: query
  *         name: user
@@ -103,7 +103,7 @@ router.get(
  * /api/website/{websiteId}:
  *   get:
  *     tags: [Website]
- *     summary: Get the scrapped links for a website if it exists
+ *     summary: Get the scraped links for a website if it exists
  *     parameters:
  *       - in: path
  *         name: websiteId

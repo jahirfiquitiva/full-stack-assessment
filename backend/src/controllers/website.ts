@@ -10,7 +10,7 @@ import {
   createSuccessResponse,
   createErrorResponse,
 } from './../utils/responses';
-import { scrapeWebsite } from './../utils/scrapper';
+import { scrapeWebsite } from '../utils/scraper';
 import { findUser } from './user';
 
 const findWebsiteWithURL = (url: Website['url']): MongoQuery<WebsiteDocument> =>

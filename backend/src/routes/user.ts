@@ -29,7 +29,7 @@ const router: Router = Router();
  * /api/user:
  *   post:
  *     tags: [User]
- *     summary: Login user
+ *     summary: Creates a new user record or returns an existing one if found
  *     requestBody:
  *       description: Returns the user data (id and username). If it doesn't exist, it's created
  *       required: true
