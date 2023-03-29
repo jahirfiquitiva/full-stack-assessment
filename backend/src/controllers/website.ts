@@ -48,7 +48,6 @@ export const saveWebsite: RequestHandler<Website> = async (req, res) => {
       website.users.push(user.id);
       await website.save();
     }
-
     return res.status(200).json(createSuccessResponse<Website>(website));
   } catch (e: unknown) {
     return res.status(500).json(createErrorResponse((e as Error).message));
@@ -59,7 +58,8 @@ export const findWebsitesForUserRequestHandler: RequestHandler<
   Array<Website>
 > = async (req, res) => {
   try {
-    const { user: userQuery } = req.query;
+    const { user: userQuery, page, limit } = req.query;
+
     let username = Array.isArray(userQuery)
       ? userQuery.join('')
       : userQuery?.toString() || '';
@@ -71,7 +71,14 @@ export const findWebsitesForUserRequestHandler: RequestHandler<
         .json(createErrorResponse(`User "${username}" was not found`));
     }
 
-    const websites = await findWebsitesForUser(user.id);
+    // allow pages numbers from 1 instead of 0
+    const pageNumber = (parseInt(page as string, 10) || 1) - 1;
+    // limit to 5 items by default
+    const itemsLimit = parseInt(limit as string, 10) || 5;
+
+    const websites = await findWebsitesForUser(user.id)
+      .skip(pageNumber * itemsLimit)
+      .limit(itemsLimit);
     return res.status(200).json(createSuccessResponse(websites));
   } catch (e: unknown) {
     return res.status(500).json(createErrorResponse((e as Error).message));

@@ -29,7 +29,7 @@ export const scrapeWebsite = async (
   }
 
   const links: Array<Link> = [];
-  document.querySelectorAll('a').forEach((element, index) => {
+  document.querySelectorAll('a').forEach((element) => {
     if (element.href) {
       links.push({
         url: element.href,

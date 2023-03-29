@@ -5,8 +5,9 @@ import {
   createErrorResponse,
 } from './../utils/responses';
 
-export const findUser = (username: User['username']): MongoQuery<UserDocument> =>
-  UserModel.findOne({ username });
+export const findUser = (
+  username: User['username'],
+): MongoQuery<UserDocument> => UserModel.findOne({ username });
 
 const findOrCreateUser = async (
   username: User['username'],
@@ -19,7 +20,7 @@ const findOrCreateUser = async (
   return user;
 };
 
-export const findOrCreateUserRequestHandler: RequestHandler<{ username: string }, User> = async (
+export const findOrCreateUserRequestHandler: RequestHandler<User> = async (
   req,
   res,
 ) => {
