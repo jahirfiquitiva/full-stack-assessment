@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
 
-import { saveWebsite } from './../controllers/website';
+import { saveWebsite, findWebsitesForUserRequestHandler } from './../controllers/website';
 import { validator } from './../middlewares/validator';
 
 const router: Router = Router();
@@ -32,8 +32,8 @@ const router: Router = Router();
  *   post:
  *     tags: [Website]
  *     summary: Login website
+ *     description: Returns the website data (id and websitename). If it doesn't exist, it's created
  *     requestBody:
- *       description: Returns the website data (id and websitename). If it doesn't exist, it's created
  *       required: true
  *       content:
  *         application/json:
@@ -56,6 +56,33 @@ router.post(
     validator,
   ],
   saveWebsite,
+);
+
+
+/**
+ * @swagger
+ * /api/website:
+ *   get:
+ *     tags: [Website]
+ *     summary: Get the scrapped websites for the given user
+ *     parameters:
+ *       - in: query
+ *         name: user
+ *         schema:
+ *           type: string
+ *         description: The username of the user to search websites for
+ *     responses:
+ *       "200":
+ *         description:
+ *           Process completed successfully. A list of websites is returned (can be empty).
+ *       "500":
+ *         description: Couldn't connect to database or an unexpected error occurred.
+ */
+
+router.get(
+  '/',
+  [check('user', 'Username is required').notEmpty(), validator],
+  findWebsitesForUserRequestHandler,
 );
 
 export default router;

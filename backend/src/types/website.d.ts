@@ -10,7 +10,7 @@ export interface Website {
   title: string;
   url: string;
   links: Array<Link>;
-  userId: string;
+  users: Array<string>;
 }
 
 export type WebsiteDocument = Omit<Document, '_id'> & Website;

@@ -29,10 +29,14 @@ const WebsiteSchema = new Schema({
     unique: true,
     validate: [validator.isURL],
   },
-  userId: {
-    type: Schema.Types.ObjectId,
-    required: true,
-  },
+  users: [
+    {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+      default: [],
+    },
+  ],
   links: [LinkSchema],
 });
 
