@@ -17,11 +17,11 @@ const router: Router = Router();
  * @swagger
  * components:
  *   schemas:
- *      UserLogin:
- *         type: object
- *         user:
- *             username:
- *                 type:string
+ *     User:
+ *       type: object
+ *       properties:
+ *         username:
+ *           type: string
  */
 
 /**
@@ -36,7 +36,7 @@ const router: Router = Router();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/UserLogin'
+ *             $ref: '#/components/schemas/User'
  *     responses:
  *       "200":
  *         description:
