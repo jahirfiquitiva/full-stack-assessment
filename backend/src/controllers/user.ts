@@ -15,11 +15,6 @@ export const loginUser: RequestHandler<{ username: string }, User> = async (
 ) => {
   try {
     const { username } = req.body;
-    if (!username)
-      return res
-        .status(400)
-        .json(createErrorResponse('Missing username in request'));
-
     let user = await findUserWithUsername(username);
     if (!user) {
       user = new UserModel({ username });

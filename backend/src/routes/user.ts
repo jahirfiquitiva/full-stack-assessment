@@ -50,7 +50,22 @@ router.post(
   [
     check('username', 'Username is required').notEmpty(),
     check('username', 'Username must be lowercase').isLowercase(),
-    check('username', 'Username must include alpha characters only').isAlpha(),
+    check(
+      'username',
+      'Username must include alphanumeric characters only',
+    ).isAlphanumeric(),
+    check('username', 'Username cannot start with a number').custom(
+      (text: string) => {
+        const firstChar = text.split('')?.[0];
+        if (!firstChar) return false;
+        try {
+          const number = parseInt(firstChar);
+          return Number.isNaN(number); // Invalid if first char is a number
+        } catch (e) {
+          return false;
+        }
+      },
+    ),
     validator,
   ],
   loginUser,

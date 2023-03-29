@@ -9,7 +9,7 @@ const UserSchema = new Schema({
     required: true,
     unique: true,
     trim: true,
-    validate: [validator.isAlpha, validator.isLowercase],
+    validate: [validator.isAlphanumeric, validator.isLowercase],
   },
 });
 
