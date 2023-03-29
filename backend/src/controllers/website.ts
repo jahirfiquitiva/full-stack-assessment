@@ -19,10 +19,7 @@ const findWebsiteWithURL = (url: Website['url']): MongoQuery<WebsiteDocument> =>
 const findWebsitesForUser = (userId: User['id']) =>
   WebsiteModel.find({ users: userId });
 
-export const saveWebsite: RequestHandler<
-  { url: string; username: string },
-  Website
-> = async (req, res) => {
+export const saveWebsite: RequestHandler<Website> = async (req, res) => {
   try {
     const { url, username } = req.body;
 
@@ -59,7 +56,6 @@ export const saveWebsite: RequestHandler<
 };
 
 export const findWebsitesForUserRequestHandler: RequestHandler<
-  { username: string },
   Array<Website>
 > = async (req, res) => {
   try {
