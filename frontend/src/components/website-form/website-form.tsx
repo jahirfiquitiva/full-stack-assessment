@@ -58,7 +58,7 @@ export const WebsiteForm = () => {
           <Field<string>
             name="website"
             initialValue={''}
-            onBlurValidate={z.string().min(1, 'This field is required')}
+            onSubmitValidate={z.string().min(1, 'This field is required')}
           >
             {({ value, setValue, onBlur, errors }) => (
               <div className={styles.formField}>
