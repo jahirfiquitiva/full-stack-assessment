@@ -1,5 +1,10 @@
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
+import styles from './table.module.css';
 
 export const Table = (props: PropsWithChildren) => {
-  return <table>{props.children}</table>;
+  return (
+    <div className={styles.tableContainer}>
+      <table>{props.children}</table>
+    </div>
+  );
 };
