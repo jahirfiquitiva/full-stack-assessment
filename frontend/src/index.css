@@ -105,3 +105,7 @@ textarea {
 *:focus {
   outline-color: var(--nc-ac-1);
 }
+
+table td.truncate {
+  max-width: 16ch;
+}

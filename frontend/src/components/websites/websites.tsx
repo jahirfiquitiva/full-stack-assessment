@@ -41,7 +41,9 @@ const WebsitesContent = () => {
                         <>{website.title || website.url}</>
                       )}
                     </td>
-                    <td>{website.linksCount || 'In progress'}</td>
+                    <td className={'truncate'}>
+                      {website.linksCount || 'In progress'}
+                    </td>
                   </tr>
                 );
               })}

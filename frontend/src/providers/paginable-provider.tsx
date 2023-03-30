@@ -49,11 +49,14 @@ export function PaginableProvider<T>(props: PaginableProviderProps<T>) {
     setLoading(true);
     fetch(urlWithParams)
       .then((response) => response.json())
-      .then((data: BackendResponse<Array<T>>) => {
+      .then((data: BackendResponse<T | Array<T>>) => {
         setLoading(false);
         if (data.ok) {
-          setItems(data.data || []);
-          setTotalItemsCount(data.count || data.data.length || 0);
+          const items: Array<T> = Array.isArray(data.data)
+            ? data.data
+            : [data.data];
+          setItems(items);
+          setTotalItemsCount(data.count || items.length || 0);
         }
       })
       .catch(() => {
