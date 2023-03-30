@@ -78,6 +78,7 @@ export const findWebsitesForUserRequestHandler: RequestHandler<
 
     const websitesCount = await WebsiteModel.countDocuments({ users: user.id });
     const websites = await findWebsitesForUser(user.id)
+      .sort({ _id: -1 })
       .skip(pageNumber * itemsLimit)
       .limit(itemsLimit);
     return res.status(200).json(
