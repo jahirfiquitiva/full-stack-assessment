@@ -29,11 +29,11 @@ export const scrapeWebsite = async (
   }
 
   const links: Array<Link> = [];
-  document.querySelectorAll('a').forEach((element) => {
+  document.querySelectorAll('a').forEach((element, index) => {
     if (element.href) {
       links.push({
         url: element.href,
-        title: element.innerText || element.innerHTML,
+        title: element.innerText || element.innerHTML || `Link #${index + 1}`,
       });
     }
   });
