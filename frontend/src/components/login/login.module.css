@@ -1,0 +1,33 @@
+form.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 36ch;
+  margin: 0 auto;
+}
+
+div.formField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+div.formField > input {
+  margin: 0;
+}
+
+ul.errorsList {
+  padding-left: 1rem;
+  color: var(--nc-err);
+  margin: 0;
+}
+
+ul.errorsList > li {
+  margin: 0;
+}
+
+ul:not(:has(li)) {
+  display: none;
+  visibility: hidden;
+}
