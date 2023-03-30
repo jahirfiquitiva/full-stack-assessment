@@ -11,6 +11,7 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 8000;
 const baseApiUrl = '/api';
+const docsRoute = `${baseApiUrl}/docs`;
 
 dbConnection().catch();
 
@@ -19,7 +20,17 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(`${baseApiUrl}/docs`, docsRoutes);
+app.get('/', (req, res) => {
+  res.redirect(docsRoute);
+  return;
+});
+
+app.get('/api/', (req, res) => {
+  res.redirect(docsRoute);
+  return;
+});
+
+app.use(docsRoute, docsRoutes);
 app.use(`${baseApiUrl}/user`, userRoutes);
 app.use(`${baseApiUrl}/website`, websiteRoutes);
 
