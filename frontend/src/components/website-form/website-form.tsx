@@ -85,7 +85,7 @@ export const WebsiteForm = () => {
                     onClick={submit}
                     disabled={submitting || isValidating}
                   >
-                    Submit
+                    Scrape
                   </button>
                 </div>
                 <ul className={styles.errorsList}>

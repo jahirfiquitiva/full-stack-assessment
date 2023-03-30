@@ -19,13 +19,10 @@ const router = createBrowserRouter([
   {
     path: '/websites',
     element: withAuthenticator(<Websites />),
-    errorElement: <NotFound />,
-    children: [
-      {
-        path: ':id',
-        element: withAuthenticator(<Links />),
-      },
-    ],
+  },
+  {
+    path: '/websites/:id',
+    element: withAuthenticator(<Links />),
   },
 ]);
 

@@ -12,6 +12,11 @@ export const Pagination = (props: PaginationProps) => {
   return (
     <div className={styles.paginationButtonsContainer}>
       <button
+        title={
+          currentPage === 1
+            ? 'Navigate to previous page'
+            : `Navigate to page ${currentPage - 1}`
+        }
         disabled={currentPage === 1}
         onClick={() => {
           setCurrentPage?.(currentPage - 1);
@@ -22,6 +27,8 @@ export const Pagination = (props: PaginationProps) => {
       {Array.from(Array(pagesCount).keys()).map((_, index) => {
         return (
           <button
+            title={`Navigate to page ${index + 1}`}
+            key={`button-for-page-${index + 1}`}
             className={currentPage === index + 1 ? styles.active : undefined}
             disabled={currentPage === index + 1}
             onClick={() => {
@@ -33,6 +40,11 @@ export const Pagination = (props: PaginationProps) => {
         );
       })}
       <button
+        title={
+          currentPage === pagesCount
+            ? 'Navigate to next page'
+            : `Navigate to page ${currentPage + 1}`
+        }
         disabled={currentPage === pagesCount}
         onClick={() => {
           setCurrentPage?.(currentPage + 1);

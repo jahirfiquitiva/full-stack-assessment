@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { WebsitesPaginableContext } from '../../contexts';
 import { useLocalStorage } from '../../hooks/use-local-storage';
 import { usePaginable, PaginableProvider } from '../../providers';
@@ -32,7 +33,13 @@ const WebsitesContent = () => {
                 return (
                   <tr key={website.url}>
                     <td className={'truncate'}>
-                      {website.title || website.url}
+                      {website.id ? (
+                        <Link to={`/websites/${website.id}`}>
+                          {website.title || website.url}
+                        </Link>
+                      ) : (
+                        <>{website.title || website.url}</>
+                      )}
                     </td>
                     <td>{website.linksCount || 'In progress'}</td>
                   </tr>

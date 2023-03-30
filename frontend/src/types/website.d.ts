@@ -4,6 +4,7 @@ export interface Link {
 }
 
 export interface Website {
+  id?: string;
   title?: string;
   url: string;
   links: Array<Link>;
