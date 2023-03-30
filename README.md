@@ -10,9 +10,9 @@ Built with:
 - Swagger
 - [JSDOM](https://www.npmjs.com/package/jsdom)
 
-Data is stored in a MongoDB database provided by [Mongo Atlas](https://www.mongodb.com/atlas)
-
 Deployed on [Railway](https://railway.app?referralCode=Ri5XbE) and available at: https://koombea-backend.jahir.dev
+
+Data is stored in a MongoDB database provided by [Mongo Atlas](https://www.mongodb.com/atlas)
 
 Environment variables:
 ```bash
