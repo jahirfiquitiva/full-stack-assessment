@@ -1,5 +1,7 @@
 # full-stack-assessment
 
+This project has been organized with two folders for simplicity, but is not configured as a monorepo, therefore each folder includes its own `package.json` and requires installing its dependencies using `yarn` (preferably)
+
 ## Backend
 
 Built with:
