@@ -23,9 +23,9 @@ export const Login = () => {
           },
         })
           .then((response) => response.json())
-          .then((data: BackendResponse<{ id: string }>) => {
+          .then((data: BackendResponse<{ username: string }>) => {
             if (data.ok) {
-              setUser(data.data.id);
+              setUser(data.data.username);
               toast.success(`Welcome, ${values.username}!`);
               navigate('/websites');
             } else {

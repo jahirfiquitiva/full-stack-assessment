@@ -13,8 +13,9 @@ div.formField {
   gap: 0.5rem;
 }
 
-div.formField > input {
+div.formField input {
   margin: 0;
+  width: 100%;
 }
 
 ul.errorsList {
