@@ -11,7 +11,15 @@ export const validator = (
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.status(400).json(createErrorResponse(errors.mapped()));
+      res
+        .status(400)
+        .json(
+          createErrorResponse(
+            errors
+              .array()
+              .map((err) => `Error with field "${err.param}". ${err.msg}`),
+          ),
+        );
       return;
     }
   } catch (e) {

@@ -6,7 +6,7 @@ interface DefaultResponse {
 
 interface ErrorResponse extends DefaultResponse {
   ok: false;
-  errors: string | Array<string> | Record<string, ValidationError>;
+  errors: string | Array<string>;
 }
 
 interface PaginatedData {
