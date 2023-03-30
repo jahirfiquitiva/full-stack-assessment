@@ -1,5 +1,6 @@
 import { Form, Field } from 'houseform';
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { useLocalStorage } from '../../hooks/use-local-storage';
 import type { BackendResponse } from '../../types/backend-response';
@@ -8,6 +9,7 @@ import styles from './login.module.css';
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export const Login = () => {
+  const navigate = useNavigate();
   const [, setUser] = useLocalStorage('user');
 
   return (
@@ -25,6 +27,7 @@ export const Login = () => {
             if (data.ok) {
               setUser(data.data.id);
               toast.success(`Welcome, ${values.username}!`);
+              navigate('/websites');
             } else {
               toast.error(
                 Array.isArray(data.errors)

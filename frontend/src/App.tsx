@@ -7,21 +7,22 @@ import { Websites } from './components/websites';
 import { Links } from './components/links';
 
 import './App.css';
+import { withAuthenticator } from './components/authenticator';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Login />,
+    element: withAuthenticator(<Login />),
     errorElement: <NotFound />,
   },
   {
     path: '/websites',
-    element: <Websites />,
+    element: withAuthenticator(<Websites />),
     errorElement: <NotFound />,
     children: [
       {
         path: ':id',
-        element: <Links />,
+        element: withAuthenticator(<Links />),
       },
     ],
   },

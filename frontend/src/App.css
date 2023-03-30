@@ -3,6 +3,11 @@
   --nc-err-2: #bc2f48;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+}
+
 .toast-container {
   transition: all 0.15s ease-in-out;
 }

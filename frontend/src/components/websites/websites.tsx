@@ -1,5 +1,11 @@
+import { LogOut } from '../logout';
 import { Table } from '../table';
 
 export const Websites = () => {
-  return <Table />;
+  return (
+    <div>
+      <LogOut />
+      <Table />
+    </div>
+  );
 };

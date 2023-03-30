@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 type UseLocalStorageType<T> = [
   storedValue: T | undefined,
-  setValue: (value: T | undefined) => void,
+  setValue: (value?: T) => void,
 ];
 
 // Code from https://usehooks.com/useLocalStorage/ with some modifications
@@ -30,7 +30,7 @@ export const useLocalStorage = <T>(
 
   // Return a wrapped version of useState's setter function that ...
   // ... persists the new value to localStorage.
-  const setValue = (value: T | undefined) => {
+  const setValue = (value?: T) => {
     try {
       // If value is undefined, remove from the Local Storage
       if (!value) {
