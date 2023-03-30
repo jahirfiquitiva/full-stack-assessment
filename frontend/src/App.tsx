@@ -6,8 +6,9 @@ import { NotFound } from './components/not-found';
 import { Websites } from './components/websites';
 import { Links } from './components/links';
 
-import './App.css';
 import { withAuthenticator } from './components/authenticator';
+
+import './App.css';
 
 const router = createBrowserRouter([
   {

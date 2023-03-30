@@ -6,6 +6,7 @@ interface ErrorResponse {
 interface SuccessResponse<T> {
   ok: true;
   data: T;
+  count?: number;
 }
 
 export type BackendResponse<T> = SuccessResponse<T> | ErrorResponse;
