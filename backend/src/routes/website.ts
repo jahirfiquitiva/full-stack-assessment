@@ -123,7 +123,7 @@ router.get(
  *     responses:
  *       "200":
  *         description:
- *           Process completed successfully. A list of links is returned (can be empty).
+ *           Process completed successfully. The website object is returned with paginated links
  *       "500":
  *         description: Couldn't connect to database or an unexpected error occurred.
  */
